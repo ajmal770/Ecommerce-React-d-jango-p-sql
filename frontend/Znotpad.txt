@@ -1,0 +1,229 @@
+SING up ui refer link = https://dribbble.com/shots/25629278-E-Commerce-Sign-Up-UI?utm_source=Clipboard_Shot&utm_campaign=juliapaiva_&utm_content=E-Commerce%20Sign-Up%20UI&utm_medium=Social_Share&utm_source=Clipboard_Shot&utm_campaign=juliapaiva_&utm_content=E-Commerce%20Sign-Up%20UI&utm_medium=Social_Share 
+
+loginpage link = https://dribbble.com/shots/25629278-E-Commerce-Sign-Up-UI?utm_source=Clipboard_Shot&utm_campaign=juliapaiva_&utm_content=E-Commerce%20Sign-Up%20UI&utm_medium=Social_Share&utm_source=Clipboard_Shot&utm_campaign=juliapaiva_&utm_content=E-Commerce%20Sign-Up%20UI&utm_medium=Social_Share 
+
+
+logout page  = 
+
+
+logo = https://cdn.dribbble.com/userupload/44736510/file/8b1b8a11d88f8edefd10b6df9cdf4cb6.png?resize=1024x768&vertical=center
+
+app icon = https://cdn.dribbble.com/userupload/44736509/file/0fdd99d311c8d352fde03a9eab7a2283.png?resize=1024x768&vertical=center
+
+app name  =  https://cdn.dribbble.com/userupload/44736508/file/bf23beb61ed89dd1819c3d9ea62ab6b6.png?resize=1024x768&vertical=center
+
+
+
+
+
+
+import React from "react";
+import "./Parts.css";
+
+function Parts() {
+
+  const partsData = [
+    {
+      name: "Carbon Brush Set for Drill Machine",
+      price: "₹199",
+      oldPrice: "₹299",
+      img: "https://m.media-amazon.com/images/I/51mXKJ8F9xL.jpg"
+    },
+    {
+      name: "Angle Grinder Cutting Disc 4 Inch",
+      price: "₹99",
+      oldPrice: "₹150",
+      img: "https://m.media-amazon.com/images/I/71Z0yP5H1oL.jpg"
+    },
+    {
+      name: "Drill Chuck 10mm Replacement",
+      price: "₹349",
+      img: "https://m.media-amazon.com/images/I/61lQ2X0R3EL.jpg"
+    },
+    {
+      name: "Electric Drill Armature Rotor",
+      price: "₹699",
+      oldPrice: "₹950",
+      img: "https://m.media-amazon.com/images/I/61C3s7w9y8L.jpg"
+    },
+    {
+      name: "Power Tool Switch Replacement 16A",
+      price: "₹149",
+      img: "https://m.media-amazon.com/images/I/51XzRk6K5BL.jpg"
+    },
+    {
+      name: "Cordless Drill Battery 12V",
+      price: "₹1,299",
+      oldPrice: "₹1,800",
+      img: "https://m.media-amazon.com/images/I/71nK3p8LhPL.jpg"
+    },
+    {
+      name: "Electric Drill Gear Set",
+      price: "₹499",
+      img: "https://m.media-amazon.com/images/I/61k3k+L8xZL.jpg"
+    },
+    {
+      name: "Angle Grinder Flange Nut Set",
+      price: "₹179",
+      oldPrice: "₹250",
+      img: "https://m.media-amazon.com/images/I/51w2pGqJXPL.jpg"
+    },
+    {
+      name: "Heat Gun Heating Element Spare",
+      price: "₹399",
+      img: "https://m.media-amazon.com/images/I/61w8R6ZyQmL.jpg"
+    },
+    {
+      name: "Electric Tool Power Cord 2 Meter",
+      price: "₹249",
+      oldPrice: "₹350",
+      img: "https://m.media-amazon.com/images/I/61gF9s3Z7GL.jpg"
+    }
+  ];
+
+  return (
+    <div className="parts-section">
+
+      <h1 className="parts-title">Parts</h1>
+
+      <div className="parts-list">
+        {partsData.map((item, i) => (
+          <div className="parts-card" key={i}>
+
+            {/* Image */}
+            <img src={item.img} alt={item.name} />
+
+            {/* Title */}
+            <h4>{item.name}</h4>
+
+            {/* Price */}
+            <div className="parts-price">
+              <span className="new">{item.price}</span>
+              {item.oldPrice && <span className="old">{item.oldPrice}</span>}
+            </div>
+
+            {/* Button */}
+            <button className="cart-button">
+              Add To Cart
+            </button>
+
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default Parts;
+
+
+
+
+/* SECTION */
+.parts-section {
+  width: 100%;
+  padding: 25px;
+  background: #eef3fb;
+  font-family: Arial, sans-serif;
+}
+
+/* TITLE */
+.parts-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+/* LIST */
+.parts-list {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.parts-list::-webkit-scrollbar {
+  display: none;
+}
+
+/* CARD */
+.parts-card {
+  min-width: 220px;
+  max-width: 220px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 12px;
+  flex-shrink: 0;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  transition: 0.3s;
+}
+
+.parts-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+/* IMAGE */
+.parts-card img {
+  width: 100%;
+  height: 140px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+/* TITLE */
+.parts-card h4 {
+  font-size: 14px;
+  height: 40px;
+  overflow: hidden;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+/* PRICE */
+.parts-price .new {
+  color: #d62828;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.parts-price .old {
+  text-decoration: line-through;
+  color: gray;
+  font-size: 13px;
+}
+
+/* BUTTON */
+.cart-button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  background: #4C6793;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.cart-button:hover {
+  background: #3b5275;
+}
+
+.cart-button:active {
+  transform: scale(0.96);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .parts-card {
+    min-width: 180px;
+  }
+
+  .parts-card img {
+    height: 120px;
+  }
+}

@@ -1,0 +1,93 @@
+.pc-card {
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px;
+  width: 220px;
+  transition: 0.3s;
+  border: 1px solid #eee;
+}
+
+.pc-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* SAVE TAG */
+.pc-save {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #ff4d4d;
+  color: #fff;
+  padding: 3px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+
+/* IMAGE */
+.pc-img-box {
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pc-img-box img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* TITLE */
+.pc-title {
+  font-size: 14px;
+  margin: 10px 0;
+  color: #333;
+}
+
+/* PRICE */
+.pc-price {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pc-from {
+  font-size: 12px;
+  color: gray;
+}
+
+.pc-new {
+  font-weight: bold;
+  color: #000;
+}
+
+.pc-old {
+  text-decoration: line-through;
+  color: gray;
+  font-size: 13px;
+}
+
+/* REVIEW */
+.pc-review {
+  font-size: 12px;
+  margin: 6px 0;
+  color: #ff9800;
+}
+
+/* BUTTON */
+.pc-btn {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  background: #000;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.pc-btn:hover {
+  background: #ff6b6b;
+}

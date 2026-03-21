@@ -1,0 +1,38 @@
+
+/* Footer */
+.footer {
+    background-color: #0D0D0D;
+    color: #ccc;
+    font-size: 14px;
+}
+
+/* Footer container */
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+/* Footer sections */
+.footer-section {
+    min-width: 150px;
+}
+
+.footer-section h4 {
+    color: #F2E2C4;
+    margin-bottom: 10px;
+}
+
+.footer-section p {
+    color: #F2CA99;
+    margin: 5px 0;
+}
+
+/* Footer bottom */
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid #3B3C40;
+    padding: 10px;
+    color: #ccc;
+}
