@@ -40,6 +40,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'myapp',
+    'rest_framework_simplejwt',
+    'users',
+    'store',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +60,8 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000/'
+    'http://localhost:3000',
+    'http://localhost:3001'
 ]
 
 ROOT_URLCONF = 'myprjoect.urls'
@@ -87,6 +92,14 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+}
+
+AUTH_USER_MODEL = 'users.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
 }
 
 
@@ -125,3 +138,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+import os
+MEDIA_URL = '/images/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'images')

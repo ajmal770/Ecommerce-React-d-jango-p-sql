@@ -1,105 +1,53 @@
-import React, { useEffect, useState } from "react";
-import "./Navbar.css";
-import { useNavigate } from "react-router-dom";
+import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
+import { CartContext } from '../context/CartContext';
+import './Navbar.css';
 
-function Navbar() {
-  const [location, setLocation] = useState("Fetching...");
-  const [search, setSearch] = useState("");
-  const [message, setMessage] = useState("");
+const Navbar = () => {
+  const { user, token, logout } = useContext(AuthContext);
+  const { cart } = useContext(CartContext);
+  const navigate = useNavigate();
 
-  const navigate = useNavigate(); // ✅ correct place
-
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          setLocation(
-            "Location: " +
-              pos.coords.latitude.toFixed(2) +
-              ", " +
-              pos.coords.longitude.toFixed(2)
-          );
-        },
-        () => {
-          setLocation("Location Blocked");
-        }
-      );
-    } else {
-      setLocation("Not Supported");
-    }
-  }, []);
-
-  const showMessage = (text) => {
-    setMessage(text);
-    setTimeout(() => setMessage(""), 3000);
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
   };
 
-  const handleSearch = () => {
-    if (search.trim() === "") {
-      showMessage("Please enter a product 🔍");
-    } else {
-      showMessage(`You searched: ${search}`);
-    }
-  };
+  const cartItemCount = cart?.items?.reduce((total, item) => total + item.quantity, 0) || 0;
 
   return (
-    <>
-      {message && <div className="custom-message">{message}</div>}
-
-      <nav className="navbar">
-        <div className="logo" onClick={() => showMessage("Home clicked")}>
-          Bat Store
-        </div>
-
-        <ul className="nav-links">
-          <li onClick={() => showMessage("Home")}>Home</li>
-          <li onClick={() => showMessage("Products")}>Products</li>
-          <li onClick={() => showMessage("Offers")}>Offers</li>
-          <li onClick={() => showMessage("More")}>More</li>
-        </ul>
-
-        <div className="search-box">
-          <input
-            type="text"
-            placeholder="Search products..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          <button onClick={handleSearch}>Search</button>
-        </div>
-
-        <div className="nav-right">
-          <div className="location">{location}</div>
-
-          {/* ✅ LOGIN NAVIGATION FIX */}
-          <div
-            className="account"
-            onClick={() => navigate("/login")}
-            style={{ cursor: "pointer" }}
-          >
-            👤 Login
-          </div>
-
-          <div className="cart" onClick={() => showMessage("Cart")}>
-            🛒 Cart
-          </div>
-        </div>
-      </nav>
-
-      <div className="category-bar">
-        <ul>
-          <li onClick={() => showMessage("For You")}>For You</li>
-          <li onClick={() => showMessage("Electronics")}>Electronics</li>
-          <li onClick={() => showMessage("Robotics")}>Robotics</li>
-          <li onClick={() => showMessage("Hardware")}>Hardware</li>
-          <li onClick={() => showMessage("Beauty")}>Beauty</li>
-          <li onClick={() => showMessage("Food")}>Food</li>
-          <li onClick={() => showMessage("Books")}>Books</li>
-          <li onClick={() => showMessage("Furniture")}>Furniture</li>
+    <nav className="navbar">
+      <div className="container navbar-container">
+        <Link to="/" className="navbar-logo">
+          <span className="logo-icon">🔧</span>
+          ProHardware
+        </Link>
+        <ul className="navbar-links">
+          <li><Link to="/">Products</Link></li>
+          {user?.is_admin && (
+            <li><Link to="/admin-dashboard" className="admin-link">Admin Panel</Link></li>
+          )}
+          {token ? (
+            <>
+              <li>
+                <Link to="/cart" className="cart-link">
+                  🛒 <span className="cart-badge">{cartItemCount}</span>
+                </Link>
+              </li>
+              <li className="user-greeting">Hi, {user?.username}</li>
+              <li><button onClick={handleLogout} className="btn btn-outline" style={{padding: '0.4rem 1rem'}}>Logout</button></li>
+            </>
+          ) : (
+            <>
+              <li><Link to="/login" className="btn btn-outline" style={{padding: '0.4rem 1rem'}}>Login</Link></li>
+              <li><Link to="/register" className="btn btn-primary" style={{padding: '0.4rem 1rem'}}>Register</Link></li>
+            </>
+          )}
         </ul>
       </div>
-    </>
+    </nav>
   );
-}
+};
 
 export default Navbar;

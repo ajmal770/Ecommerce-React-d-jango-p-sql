@@ -1,42 +1,28 @@
-import React from "react";
-import "./ProductCard.css";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './ProductCard.css';
 
-function ProductCard({ product }) {
-  // ✅ Prevent crash
-  if (!product) return null;
+const ProductCard = ({ product }) => {
+  const imageUrl = product.images?.length > 0 
+    ? `http://localhost:8000${product.images[0].image}` 
+    : 'https://placehold.co/400x300/e2e8f0/475569?text=No+Image';
 
   return (
-    <div className="pc-card">
-
-      {/* SAVE TAG */}
-      {product.save && <div className="pc-save">{product.save}</div>}
-
-      {/* IMAGE */}
-      <div className="pc-img-box">
-        <img src={product.img} alt={product.name} />
+    <div className="card product-card">
+      <div className="product-image-container">
+        <img src={imageUrl} alt={product.name} className="product-image" />
       </div>
-
-      {/* TITLE */}
-      <h3 className="pc-title">{product.name}</h3>
-
-      {/* PRICE */}
-      <div className="pc-price">
-        {product.tag && <span className="pc-from">{product.tag}</span>}
-        <span className="pc-new">{product.price}</span>
-        {product.oldPrice && (
-          <span className="pc-old">{product.oldPrice}</span>
-        )}
+      <div className="product-details">
+        <h3 className="product-name" title={product.name}>{product.name}</h3>
+        <p className="product-price">₹{product.price}</p>
+        <div className="product-actions">
+          <Link to={`/product/${product.id}`} className="btn btn-outline detail-btn">
+            View Details
+          </Link>
+        </div>
       </div>
-
-      {/* REVIEW */}
-      <div className="pc-review">
-        ★★★★★ <span>No reviews</span>
-      </div>
-
-      {/* BUTTON */}
-      <button className="pc-btn">Add To Cart</button>
     </div>
   );
-}
+};
 
 export default ProductCard;

@@ -1,42 +1,20 @@
-import React from 'react'
-import "./Footer.css"
-function Footer() {
+import React from 'react';
+import './Footer.css';
+
+const Footer = () => {
   return (
-    <div>
-       <footer className="footer">
-        <div className="footer-container">
-          <div className="footer-section">
-            <h4>About</h4>
-            <p>About Us</p>
-            <p>Careers</p>
-          </div>
-
-          <div className="footer-section">
-            <h4>Help</h4>
-            <p>Payments</p>
-            <p>Shipping</p>
-            <p>Returns</p>
-          </div>
-
-          <div className="footer-section">
-            <h4>Policy</h4>
-            <p>Terms of Use</p>
-            <p>Privacy</p>
-          </div>
-
-          <div className="footer-section">
-            <h4>Contact</h4>
-            <p>Email: support@shop.com</p>
-            <p>Phone: +91 98765 43210</p>
-          </div>
+    <footer className="footer">
+      <div className="container footer-container">
+        <div className="footer-brand">
+          <h3>ProHardware</h3>
+          <p>Your trusted source for professional grade tools and spare parts.</p>
         </div>
-
-        <div className="footer-bottom">
-          <p>© 2026 YourShop</p>
+        <div className="footer-links">
+          <p>&copy; {new Date().getFullYear()} ProHardware. All rights reserved.</p>
         </div>
-      </footer>
-    </div>
-  )
-}
+      </div>
+    </footer>
+  );
+};
 
-export default Footer
+export default Footer;
