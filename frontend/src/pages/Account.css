@@ -1,0 +1,194 @@
+.account-page-wrapper {
+  background-color: #f0f2f5;
+  min-height: 100vh;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.account-hero {
+  height: 200px;
+  background: linear-gradient(135deg, #1b3c3a 0%, #3a6360 100%);
+  position: relative;
+  width: 100%;
+}
+
+.account-main-content {
+  max-width: 1000px;
+  margin: -80px auto 50px;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 30px;
+  position: relative;
+  z-index: 10;
+}
+
+/* Sidebar */
+.account-sidebar {
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  height: fit-content;
+}
+
+.account-profile-summary {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.account-avatar-large {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #1b3c3a;
+  color: white;
+  font-size: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 15px;
+  border: 5px solid white;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.account-name-label {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1b3c3a;
+  margin: 0;
+}
+
+.account-role-tag {
+  display: inline-block;
+  background: #e1f0ef;
+  color: #1b3c3a;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 5px;
+  text-transform: uppercase;
+}
+
+.account-nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.account-nav-item {
+  padding: 12px 15px;
+  margin-bottom: 5px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #555;
+  font-weight: 500;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.account-nav-item:hover {
+  background: #f8f9fa;
+  color: #1b3c3a;
+}
+
+.account-nav-item.active {
+  background: #1b3c3a;
+  color: white;
+}
+
+/* Content Area */
+.account-details-panels {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.account-panel {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.account-panel h2 {
+  font-size: 22px;
+  color: #1b3c3a;
+  margin: 0 0 25px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.info-label {
+  font-size: 13px;
+  color: #888;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+  background: #f8f9fa;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.account-actions {
+  margin-top: 30px;
+  display: flex;
+  gap: 15px;
+}
+
+.edit-btn {
+  padding: 12px 25px;
+  background: #1b3c3a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout-secondary-btn {
+  padding: 12px 25px;
+  background: transparent;
+  color: #e53935;
+  border: 2px solid #e53935;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout-secondary-btn:hover {
+  background: #fff5f5;
+}
+
+@media (max-width: 900px) {
+  .account-main-content {
+    grid-template-columns: 1fr;
+  }
+}
+

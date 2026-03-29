@@ -1,0 +1,204 @@
+body {
+  margin: 0;
+  padding: 0;
+  /* overflow-x: hidden; */
+
+}
+
+.navbar {
+  width: 100%;
+  height: 70px;
+  background: #98DED9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1b3c3a;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  color: #1b3c3a;
+}
+
+.nav-links li {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.nav-links li:hover {
+  color: white;
+}
+
+.search-box {
+  display: flex;
+  width: 35%;
+  margin-top: 1rem;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  outline: none;
+  border-radius: 5px 0 0 5px;
+  height: 2rem;
+}
+
+.search-box button {
+  padding: 8px 15px 5px;
+  border: none;
+  background: #1b3c3a;
+  color: white;
+  cursor: pointer;
+  border-radius: 0 5px 5px 0;
+  height: 2.6rem;
+  position: relative;
+  bottom: 0.9rem;
+
+}
+
+.search-box button:hover {
+  background: #145a57;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 15px;
+  color: #1b3c3a;
+  margin-left: 2rem;
+}
+
+.location {
+  font-size: 14px;
+  margin-right: 5rem;
+}
+
+.account,
+.cart {
+  cursor: pointer;
+  transition: 0.3s;
+  position: relative;
+  right: 5rem;
+}
+
+.account:hover,
+.cart:hover {
+  color: white;
+}
+
+.category-bar {
+  width: 100%;
+  background: #FFF7F7;
+  border-top: 1px solid #fdfdfd;
+  border-bottom: 1px solid #ffffff;
+  padding: 5px 5px;
+  font-weight: 500;
+}
+
+.category-bar ul {
+  display: flex;
+  justify-content: center;
+  gap: 70px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.category-bar ul li {
+  cursor: pointer;
+  font-weight: 500;
+  color: #1b3c3a;
+  transition: 0.3s;
+}
+
+.category-bar ul li:hover {
+  color: #145a57;
+}
+
+.category-bar ul {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.nav-links li,
+.category-bar li,
+.logo,
+.account,
+.cart {
+  cursor: pointer;
+}
+
+.search-box input {
+  padding: 5px;
+}
+
+.search-box button {
+  cursor: pointer;
+}
+
+.custom-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: bold;
+
+  background: rgba(0, 0, 0, 0.5);
+
+
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.account {
+  cursor: pointer;
+  transition: 0.3s;
+  position: relative;
+  min-width: 120px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-add-product {
+  cursor: pointer;
+  background-color: #1b3c3a;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: 0.3s;
+  margin-right: 15px;
+}
+
+.admin-add-product:hover {
+  background-color: #145a57;
+}

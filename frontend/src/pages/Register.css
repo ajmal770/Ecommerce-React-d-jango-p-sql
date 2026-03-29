@@ -1,0 +1,160 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    /* background: linear-gradient(135deg, #3B3C40, #0D0D0D); */
+
+}
+
+
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    gap: 30px;
+    padding: 20px;
+}
+
+.box-img {
+    flex: 1;
+    max-width: 450px;
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.box-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.box-form {
+    flex: 1;
+    max-width: 450px;
+    background: linear-gradient(135deg, #F2E2C4, #F2CA99);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.box-form h1 {
+    color: #3B3C40;
+    margin-bottom: 20px;
+}
+
+.box-form form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.box-form input {
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background: #fff7eb;
+}
+
+.box-form input:focus {
+    border: 2px solid #A67A46;
+}
+
+.gender {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0;
+    color: #3B3C40;
+}
+
+.gender input {
+    margin-right: 5px;
+}
+
+.terms {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    color: #3B3C40;
+}
+
+.terms span {
+    margin-left: 5px;
+}
+
+button {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background-color: #A67A46;
+    color: #0D0D0D;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #3B3C40;
+    color: #F2E2C4;
+}
+
+@media (max-width: 950px) {
+    .register-container {
+        flex-direction: column;
+    }
+
+    .box-img,
+    .box-form {
+        max-width: 90%;
+    }
+}
+
+.box-form select {
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background: #fff7eb;
+    font-size: 14px;
+    cursor: pointer;
+    width: 100%;
+    color: #3B3C40;
+}
+
+.box-form select option {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.box-form select:focus {
+    border: 2px solid #A67A46;
+}
+
+.box-form select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.role-selection {
+    position: relative;
+}
+
+.role-selection::after {
+    content: "▼";
+    position: absolute;
+    right: 15px;
+    top: 40px;
+    pointer-events: none;
+    color: #A67A46;
+}
