@@ -9,6 +9,7 @@ urlpatterns = [
     path('login/', LoginView.as_view()),
     path('forgot-password/', ForgotPasswordView.as_view()),
 
+
     path('add-cart/', AddToCart.as_view()),
     path('get-cart/', GetCart),
     path('update-cart/', UpdateCart.as_view()),
