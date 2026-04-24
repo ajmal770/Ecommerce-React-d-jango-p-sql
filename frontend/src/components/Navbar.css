@@ -1,11 +1,10 @@
 body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 
 }
 
-/* Navbar */
 .navbar {
   width: 100%;
   height: 70px;
@@ -18,14 +17,12 @@ body {
   font-weight: 700;
 }
 
-/* Logo */
 .logo {
   font-size: 24px;
   font-weight: bold;
   color: #1b3c3a;
 }
 
-/* Menu Links */
 .nav-links {
   display: flex;
   list-style: none;
@@ -42,10 +39,10 @@ body {
   color: white;
 }
 
-/* Search Box */
 .search-box {
   display: flex;
-  width: 40%;
+  width: 35%;
+  margin-top: 1rem;
 }
 
 .search-box input {
@@ -54,22 +51,26 @@ body {
   border: none;
   outline: none;
   border-radius: 5px 0 0 5px;
+  height: 2rem;
 }
 
 .search-box button {
-  padding: 8px 15px;
+  padding: 8px 15px 5px;
   border: none;
   background: #1b3c3a;
   color: white;
   cursor: pointer;
   border-radius: 0 5px 5px 0;
+  height: 2.6rem;
+  position: relative;
+  bottom: 0.9rem;
+
 }
 
 .search-box button:hover {
   background: #145a57;
 }
 
-/* Right Section */
 .nav-right {
   display: flex;
   align-items: center;
@@ -79,13 +80,11 @@ body {
   margin-left: 2rem;
 }
 
-/* Location */
 .location {
   font-size: 14px;
   margin-right: 5rem;
 }
 
-/* Account & Cart */
 .account,
 .cart {
   cursor: pointer;
@@ -99,16 +98,12 @@ body {
   color: white;
 }
 
-/* ========================= */
-/* CATEGORY NAVBAR */
-/* ========================= */
-
 .category-bar {
   width: 100%;
   background: #FFF7F7;
   border-top: 1px solid #fdfdfd;
   border-bottom: 1px solid #ffffff;
-  padding: 10px 0;
+  padding: 5px 5px;
   font-weight: 500;
 }
 
@@ -132,12 +127,10 @@ body {
   color: #145a57;
 }
 
-/* Responsive (mobile scroll) */
 .category-bar ul {
   overflow-x: auto;
   white-space: nowrap;
 }
-
 
 .nav-links li,
 .category-bar li,
@@ -155,9 +148,6 @@ body {
   cursor: pointer;
 }
 
-
-
-/* Transparent Message Box */
 .custom-message {
   position: fixed;
   top: 20px;
@@ -168,9 +158,7 @@ body {
   font-weight: bold;
 
   background: rgba(0, 0, 0, 0.5);
-  /* 🔥 transparent */
-  /* backdrop-filter: blur(10px); */
-  /* glass effect */
+
 
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   z-index: 999;
@@ -187,4 +175,15 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.account {
+  cursor: pointer;
+  transition: 0.3s;
+  position: relative;
+  min-width: 120px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

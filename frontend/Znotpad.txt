@@ -227,3 +227,543 @@ export default Parts;
     height: 120px;
   }
 }
+
+
+
+go to home pag eworking code under 
+
+import React, { useState } from "react";
+import "./Login.css";
+import { useNavigate, Link } from "react-router-dom";
+
+function Login() {
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.type === "email" ? "email" : "password"]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (formData.email && formData.password) {
+      // alert("Login Successful");
+      navigate("/"); // Normal user home
+    } else {
+      alert("Please fill all fields");
+    }
+  };
+
+  return (
+    <>
+      <div className="container" id="mainBox">
+        <div className="img-box">
+          <img
+            src="https://img.freepik.com/premium-photo/set-new-power-tools-isolated-black-background-drill-puncher-electric-saw-jigsaw-circular-saw_154092-20249.jpg"
+            alt="Login"
+          />
+        </div>
+
+        <div className="login-box">
+          <h1>Welcome Back</h1>
+
+          <form className="login-form" onSubmit={handleSubmit}>
+            <label>Email</label>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              required
+              value={formData.email}
+              onChange={handleChange}
+            />
+
+            <label>Password</label>
+            <input
+              type="password"
+              placeholder="Enter your password"
+              required
+              value={formData.password}
+              onChange={handleChange}
+            />
+
+            <div className="form-options">
+              <label className="remember">
+                <input type="checkbox" /> Remember me
+              </label>
+
+              <Link
+                to="/register-admin" // change route to your Admin Registration page
+                className="admin-link"
+                state={{ role: "Admin" }} // you can still pass role if needed
+              >
+                Admin Login
+              </Link>
+
+              <Link to="/forgot-password" className="forgot-link">
+                Forgot Password?
+              </Link>
+            </div>
+
+            <button type="submit">Login</button>
+
+            <p className="signup-text">
+              New user? <Link to="/Register">Sign up</Link>
+            </p>
+          </form>
+        </div>
+      </div>
+      <footer className="footer">
+        <div className="footer-container">
+          <div className="footer-section">
+            <h4>About</h4>
+            <p>About Us</p>
+            <p>Careers</p>
+          </div>
+
+          <div className="footer-section">
+            <h4>Help</h4>
+            <p>Payments</p>
+            <p>Shipping</p>
+            <p>Returns</p>
+          </div>
+
+          <div className="footer-section">
+            <h4>Policy</h4>
+            <p>Terms of Use</p>
+            <p>Privacy</p>
+          </div>
+
+          <div className="footer-section">
+            <h4>Contact</h4>
+            <p>Email: support@shop.com</p>
+            <p>Phone: +91 98765 43210</p>
+          </div>
+        </div>
+
+        <div className="footer-bottom">
+          <p>© 2026 YourShop</p>
+        </div>
+      </footer>
+    </>
+  );
+}
+
+export default Login;
+
+
+
+
+
+
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import "./Register.css";
+import Footer from "../components/Footer";
+
+function Register() {
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    firstName: "",
+    secondName: "",
+    email: "",
+    phone: "",
+    password: "",
+    confirmPassword: "",
+    gender: "",
+    role: "User",
+    terms: false,
+  });
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // ✅ Password validation
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+
+    // ✅ Terms validation
+    if (!formData.terms) {
+      alert("Please accept Terms & Conditions");
+      return;
+    }
+
+    try {
+      const res = await axios.post(
+        "http://127.0.0.1:8000/api/register/",
+        {
+          username: formData.firstName,
+          email: formData.email,
+          password: formData.password,
+          user_type: formData.role === "Admin" ? "admin" : "customer",
+        }
+      );
+
+      console.log(res.data);
+
+      alert("Registration Successful!");
+
+      navigate("/login");
+
+    } catch (error) {
+      console.error(error.response?.data);
+      alert("Registration Failed");
+    }
+  };
+
+  return (
+    <>
+      <div className="register-container">
+        <div className="box-img">
+          <img
+            src="https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/08/Image_-_E-Commerce_Website_.jpeg.jpg"
+            alt="Register"
+          />
+        </div>
+
+        <div className="box-form">
+          <h1>Register</h1>
+
+          <form onSubmit={handleSubmit}>
+            <input type="text" name="firstName" placeholder="First Name" onChange={handleChange} required />
+            <input type="text" name="secondName" placeholder="Second Name" onChange={handleChange} required />
+            <input type="email" name="email" placeholder="Email" onChange={handleChange} required />
+            <input type="tel" name="phone" placeholder="Phone" onChange={handleChange} required />
+            <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
+            <input type="password" name="confirmPassword" placeholder="Confirm Password" onChange={handleChange} required />
+
+            <select name="role" value={formData.role} onChange={handleChange}>
+              <option value="User">User</option>
+              <option value="Admin">Admin</option>
+            </select>
+
+            <div>
+              <label>
+                <input type="radio" name="gender" value="Male" onChange={handleChange} /> Male
+              </label>
+              <label>
+                <input type="radio" name="gender" value="Female" onChange={handleChange} /> Female
+              </label>
+            </div>
+
+            <div>
+              <input type="checkbox" name="terms" onChange={handleChange} />
+              <span>Accept Terms</span>
+            </div>
+
+            <button type="submit">Register</button>
+          </form>
+        </div>
+      </div>
+
+      <Footer />
+    </>
+  );
+}
+
+export default Register;
+
+
+
+
+
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import RegisterAdmin from "./pages/RegisterAdmin"; // admin registration page
+import AdminLogin from "./pages/AdminLogin"; // admin login page
+import Logout from "./pages/Logout"; // logout page
+import ProductCard from "./components/ProductCard"; // add this import
+
+function App() {
+  return (
+    <>
+      {/* Navbar is outside Routes so it appears on all pages */}
+      
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register-admin" element={<RegisterAdmin />} />
+        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route path="/logout" element={<Logout />} />
+
+        {/* ✅ ProductCard route */}
+        <Route path="/productcard" element={<ProductCard />} />
+      </Routes>
+    </>
+  );
+}
+
+export default App;
+
+
+
+not workking code under 
+
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import "./Register.css";
+import Footer from "../components/Footer";
+
+function Register() {
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    firstName: "",
+    secondName: "",
+    email: "",
+    phone: "",
+    password: "",
+    confirmPassword: "",
+    gender: "",
+    role: "customer",
+    terms: false,
+  });
+
+  // ✅ Handle input change
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  // ✅ Handle submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    console.log("Form submitting...");
+
+    // 🔴 Validation
+    if (formData.password !== formData.confirmPassword) {
+      return;
+    }
+
+    if (!formData.terms) {
+      return;
+    }
+
+    try {
+      const payload = {
+        username: formData.firstName + "_" + formData.phone,
+        email: formData.email,
+        password: formData.password,
+        role: formData.role,
+        first_name: formData.firstName,
+        last_name: formData.secondName,
+      };
+
+      console.log("Sending Data:", payload);
+
+      // ✅ API CALL
+      await axios.post(
+        "http://127.0.0.1:8000/api/register/",
+        payload
+      );
+
+      console.log("API SUCCESS");
+
+      // ✅ ALWAYS NAVIGATE IF NO ERROR
+      navigate("/login");
+
+    } catch (error) {
+      console.error("API ERROR:", error);
+
+      // ❌ Show exact backend error
+      if (error.response) {
+        console.log("Backend Error:", error.response.data);
+      } else {
+        console.log("Server not responding!");
+      }
+
+    } finally {
+      // Cleanup if needed
+    }
+  };
+
+  return (
+    <>
+      <div className="register-container">
+        <div className="box-img">
+          <img
+            src="https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/08/Image_-_E-Commerce_Website_.jpeg.jpg"
+            alt="Register"
+          />
+        </div>
+
+        <div className="box-form">
+          <h1>Register</h1>
+
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="firstName"
+              placeholder="First Name"
+              value={formData.firstName}
+              onChange={handleChange}
+              required
+            />
+
+            <input
+              type="text"
+              name="secondName"
+              placeholder="Second Name"
+              value={formData.secondName}
+              onChange={handleChange}
+              required
+            />
+
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Phone"
+              value={formData.phone}
+              onChange={handleChange}
+              required
+            />
+
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm Password"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              required
+            />
+
+            {/* ✅ Role */}
+            <select
+              name="role"
+              value={formData.role}
+              onChange={handleChange}
+              required
+            >
+              <option value="customer">User</option>
+              <option value="admin">Admin</option>
+            </select>
+
+            {/* ✅ Gender */}
+            <div className="gender-box">
+              <label>
+                <input
+                  type="radio"
+                  name="gender"
+                  value="Male"
+                  checked={formData.gender === "Male"}
+                  onChange={handleChange}
+                />
+                Male
+              </label>
+
+              <label>
+                <input
+                  type="radio"
+                  name="gender"
+                  value="Female"
+                  checked={formData.gender === "Female"}
+                  onChange={handleChange}
+                />
+                Female
+              </label>
+            </div>
+
+            {/* ✅ Terms */}
+            <div className="terms-box">
+              <input
+                type="checkbox"
+                name="terms"
+                checked={formData.terms}
+                onChange={handleChange}
+              />
+              <span>Accept Terms</span>
+            </div>
+          </form>
+
+          <button onClick={() => navigate("/login")} style={{ marginTop: "10px" }}>
+            Go to Login
+          </button>
+        </div>
+      </div>
+
+      <Footer />
+    </>
+  );
+}
+
+export default Register;
+
+
+ajmal@gmail.com
+
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import RegisterAdmin from "./pages/RegisterAdmin"; // admin registration page
+import AdminLogin from "./pages/AdminLogin"; // admin login page
+import Logout from "./pages/Logout"; // logout page
+
+function App() {
+  return (
+    <>
+      {/* Navbar is outside Routes so it appears on all pages */}
+      {/* <Navbar /> */}
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register-admin" element={<RegisterAdmin />} />
+        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route path="/logout" element={<Logout />} />
+      </Routes>
+    </>
+  );
+}
+
+export default App;

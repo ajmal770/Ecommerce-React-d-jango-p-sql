@@ -7,32 +7,30 @@ function Login() {
 
   const [formData, setFormData] = useState({
     email: "",
-    password: ""
+    password: "",
   });
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.type === "email" ? "email" : "password"]: e.target.value
+      [e.target.type === "email" ? "email" : "password"]: e.target.value,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // 🔹 Demo login (replace with Django API later)
     if (formData.email && formData.password) {
-      alert("Login Successful ");
-      navigate("/"); 
+      // alert("Login Successful");
+      navigate("/"); // Normal user home
     } else {
-      alert("Please fill all fields ");
+      alert("Please fill all fields");
     }
   };
 
   return (
     <>
       <div className="container" id="mainBox">
-        
         <div className="img-box">
           <img
             src="https://img.freepik.com/premium-photo/set-new-power-tools-isolated-black-background-drill-puncher-electric-saw-jigsaw-circular-saw_154092-20249.jpg"
@@ -67,10 +65,18 @@ function Login() {
                 <input type="checkbox" /> Remember me
               </label>
 
-              
+              <Link
+                to="/register-admin" // change route to your Admin Registration page
+                className="admin-link"
+                state={{ role: "Admin" }} // you can still pass role if needed
+              >
+                Admin Login
+              </Link>
+
               <Link to="/forgot-password" className="forgot-link">
                 Forgot Password?
               </Link>
+              
             </div>
 
             <button type="submit">Login</button>
@@ -81,7 +87,6 @@ function Login() {
           </form>
         </div>
       </div>
-
       <footer className="footer">
         <div className="footer-container">
           <div className="footer-section">

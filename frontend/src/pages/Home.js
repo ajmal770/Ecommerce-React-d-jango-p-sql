@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-
+// import axios from "axios";
+// import { useNavigate } from "react-router-dom";
 const slides = [
   "https://makerbazar.in/cdn/shop/files/WhatsApp_Image_2025-10-24_at_20.38.07.jpg?v=1761471358&width=1600",
   "https://www.tztstore.com/upload/202307/27/202307271729003480.png",
@@ -39,19 +41,6 @@ const collections = [
 
 const products = [
   {
-    name: "Generic: A4 Dye Sublimation Paper 100/120GSM",
-    price: "₹22.00",
-    tag: "From",
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyMC0CuEPTn_sWOhV6Fkl7o1eeEU02dyz5NA&s",
-  },
-  {
-    name: "Silicone Waterproof Shoe Covers Pair",
-    price: "₹89.00",
-    oldPrice: "₹250.00",
-    save: "Save ₹161.00",
-    img: "https://images.meesho.com/images/products/562322780/zrfaj_512.webp?width=512",
-  },
-  {
     name: "XH-M564 DC12-24V 2x50W Amplifier Board",
     price: "₹449.00",
     tag: "From",
@@ -65,13 +54,7 @@ const products = [
     save: "Save ₹26.00",
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9KO4pmFS14p-vRTfFrkRRIbbBk5ss7JpgIw&s",
   },
-  {
-    name: "11 Pc Measuring Cup and Spoon Set - Green",
-    price: "₹79.00",
-    oldPrice: "₹109.00",
-    save: "Save ₹30.00",
-    img: "https://i5.walmartimages.com/seo/Guozer-Clearance-Measuring-Spoons-Set-of-11-Handle-Measuring-Cup-Eight-Piece-Set-Plastic-Measuring-Cup-Measuring-Spoon-Gray_9e5e8103-7059-4b6b-840e-204f47c8f269.92159a3d0cc83783ffbdbdbfee5275e8.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF",
-  },
+
   {
     name: "Bosch Drill Machine Carbon Brush Set (Pair)",
     price: "₹120.00",
@@ -99,13 +82,6 @@ const products = [
     oldPrice: "₹600.00",
     save: "Save ₹251.00",
     img: "https://m.media-amazon.com/images/I/81mjOH-qmzL.jpg",
-  },
-  {
-    name: "Power Tool Switch Replacement (Universal)",
-    price: "₹89.00",
-    oldPrice: "₹150.00",
-    save: "Save ₹61.00",
-    img: "https://m.media-amazon.com/images/I/718guW7RW-L._AC_UF1000,1000_QL80_.jpg",
   },
 ];
 
@@ -301,6 +277,24 @@ function Home() {
   //       : activeSlideUnique - 1,
   //   );
   // };
+
+  const navigate = useNavigate();
+  const handleAddToCart = (product) => {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const existing = cart.find((item) => item.name === product.name);
+
+    if (existing) {
+      existing.quantity += 1;
+    } else {
+      cart.push({ ...product, quantity: 1 });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    navigate("/cart"); // ✅ MUST MATCH ROUTE
+  };
+
   return (
     <>
       <Navbar />
@@ -383,11 +377,14 @@ function Home() {
                 </div>
 
                 {/* Button */}
-                <button>Add to cart</button>
+                <button onClick={() => handleAddToCart(item)}>
+                  Add to cart
+                </button>
               </div>
             ))}
           </div>
         </div>
+
         {/* TOOLS SECTION */}
         <div className="tools-section">
           <h1>Tools</h1>
@@ -409,7 +406,13 @@ function Home() {
                 </div>
 
                 {/* Button */}
-                <button>{item.button}</button>
+                <button
+                  onClick={() =>
+                    item.button === "Add To Cart" && handleAddToCart(item)
+                  }
+                >
+                  {item.button}
+                </button>
               </div>
             ))}
           </div>
@@ -436,7 +439,12 @@ function Home() {
                 </div>
 
                 {/* Button */}
-                <button className="cart-button">Add To Cart</button>
+                <button
+                  className="cart-button"
+                  onClick={() => handleAddToCart(item)}
+                >
+                  Add To Cart
+                </button>
               </div>
             ))}
           </div>
@@ -459,7 +467,7 @@ function Home() {
           </div>
 
           {/* Buttons */}
-          
+
           {/* <button
             id="prevBtnUnique"
             className="carousel-btn-unique left"

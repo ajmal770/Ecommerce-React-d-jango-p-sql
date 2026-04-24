@@ -15,6 +15,7 @@ body {
   height: 300px;
   overflow: hidden;
   position: relative;
+  margin-top: 0.1rem;
 }
 
 .carousel-track {

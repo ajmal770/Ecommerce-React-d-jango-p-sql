@@ -1,28 +1,40 @@
 import React, { useEffect, useState } from "react";
-import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
+import "./Navbar.css";
 
 function Navbar() {
   const [location, setLocation] = useState("Fetching...");
   const [search, setSearch] = useState("");
   const [message, setMessage] = useState("");
+  const [user, setUser] = useState(null);
+  const [cartCount, setCartCount] = useState(0);
 
-  const navigate = useNavigate(); // ✅ correct place
+  const navigate = useNavigate();
 
+  // Load user
+  useEffect(() => {
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    if (loggedInUser) setUser(loggedInUser);
+  }, []);
+
+  // Load cart count
+  useEffect(() => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCartCount(cart.length);
+  }, []);
+
+  // Location
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        (pos) => {
+        (pos) =>
           setLocation(
             "Location: " +
               pos.coords.latitude.toFixed(2) +
               ", " +
               pos.coords.longitude.toFixed(2)
-          );
-        },
-        () => {
-          setLocation("Location Blocked");
-        }
+          ),
+        () => setLocation("Location Blocked")
       );
     } else {
       setLocation("Not Supported");
@@ -35,11 +47,19 @@ function Navbar() {
   };
 
   const handleSearch = () => {
-    if (search.trim() === "") {
-      showMessage("Please enter a product 🔍");
-    } else {
-      showMessage(`You searched: ${search}`);
-    }
+    if (search.trim() === "") showMessage("Please enter a product 🔍");
+    else showMessage(`You searched: ${search}`);
+  };
+
+  const handleAccountClick = () => {
+    if (user) {
+      showMessage(`Logged in as ${user.role}: ${user.name}`);
+      user.role === "Admin" ? navigate("/home") : navigate("/purchase");
+    } else navigate("/login");
+  };
+
+  const handleCartClick = () => {
+    navigate("/productcard");
   };
 
   return (
@@ -70,18 +90,11 @@ function Navbar() {
 
         <div className="nav-right">
           <div className="location">{location}</div>
-
-          {/* ✅ LOGIN NAVIGATION FIX */}
-          <div
-            className="account"
-            onClick={() => navigate("/login")}
-            style={{ cursor: "pointer" }}
-          >
-            👤 Login
+          <div className="account" onClick={handleAccountClick}>
+            👤 {user ? `${user.name} (${user.role})` : "Login"}
           </div>
-
-          <div className="cart" onClick={() => showMessage("Cart")}>
-            🛒 Cart
+          <div className="cart" onClick={handleCartClick}>
+            🛒 Cart ({cartCount})
           </div>
         </div>
       </nav>
